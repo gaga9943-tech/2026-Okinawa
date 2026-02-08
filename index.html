@@ -47,6 +47,11 @@
         .map-btn { display: flex; align-items: center; justify-content: center; width: 100%; padding: 10px 0; margin-top: 12px; background: #2d3436; color: #fff; text-decoration: none; border-radius: 8px; font-size: 13px; font-weight: 500; }
         .map-btn:active { transform: scale(0.98); }
 
+        /* 清單樣式 (FunPASS用) */
+        .pass-list { list-style: none; padding: 0; margin: 10px 0; display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+        .pass-list li { font-size: 12px; color: #666; display: flex; align-items: center; }
+        .pass-list li::before { content: ''; width: 6px; height: 6px; background: #d0bfff; border-radius: 50%; margin-right: 6px; }
+
         /* 分類顏色樣式 */
         .t-flight { border-color: #a5d8ff; } .t-flight .dot { border-color: #1971c2; } .t-flight .type-tag { background: #e7f5ff; color: #1971c2; }
         .t-food { border-color: #ffc9c9; } .t-food .dot { border-color: #e03131; } .t-food .type-tag { background: #fff5f5; color: #e03131; }
@@ -78,15 +83,31 @@
     <div class="container">
         
         <div id="info" class="day-section">
-            <div class="card" style="border-left: 4px solid #f08c00;">
+            <h2 style="font-size:18px; font-weight:bold; margin-bottom:15px; color:#333;">📋 行前必備資訊</h2>
+            
+            <div class="card" style="border-left: 4px solid #f08c00; margin-left:0; margin-bottom:15px;">
                 <h3>🏨 JR九州Blossom酒店</h3>
                 <div style="font-size:13px; color:#666; margin-bottom:10px;">那霸市中心，近國際通與美榮橋站</div>
                 <a href="https://www.google.com/maps/search/?api=1&query=JR+Kyushu+Hotel+Blossom+Naha" target="_blank" class="map-btn">導航至飯店</a>
             </div>
-            <div class="card" style="border-left: 4px solid #1971c2;">
+            
+            <div class="card" style="border-left: 4px solid #1971c2; margin-left:0; margin-bottom:15px;">
                 <h3>✈️ Visit Japan Web</h3>
-                <div style="font-size:13px; color:#666; margin-bottom:10px;">入境請先填寫並截圖 QR Code</div>
-                <a href="https://www.vjw.digital.go.jp/" target="_blank" class="map-btn" style="background:#1971c2;">前往登入</a>
+                <div style="font-size:13px; color:#1971c2; font-weight:bold; margin-bottom:5px;">入境審查與海關申報</div>
+                <div style="font-size:13px; color:#666; margin-bottom:10px;">請預先完成資料填寫並截圖 QR Code。</div>
+                <a href="https://www.vjw.digital.go.jp/" target="_blank" class="map-btn" style="background:#1971c2;">前往官網登入</a>
+            </div>
+
+            <div class="card" style="border-left: 4px solid #845ef7; margin-left:0;">
+                <h3>🎟️ Okinawa FunPASS APP</h3>
+                <div style="font-size:13px; color:#845ef7; font-weight:bold; margin-bottom:5px;">景點三合一套票</div>
+                <div style="font-size:13px; color:#444; font-weight:bold;">包含項目：</div>
+                <ul class="pass-list">
+                    <li>古宇利海洋塔</li>
+                    <li>名護鳳梨園</li>
+                    <li>首里達磨寺御守</li>
+                </ul>
+                <a href="https://okinawa.funpass.app/" target="_blank" class="map-btn" style="background:#845ef7;">APP 介紹</a>
             </div>
         </div>
 
@@ -104,7 +125,7 @@
                     <div class="card">
                         <h3>🛬 抵達那霸機場 (BR112)</h3>
                         <div class="transport-info">出關約 1hr</div>
-                        <a href="https://www.google.com/maps/search/?api=1&query=Naha+Airport" target="_blank" class="map-btn">Google Maps</a>
+                        <a href="https://maps.app.goo.gl/AqvA7Htpc5A9ucgY9" target="_blank" class="map-btn">Google Maps</a>
                     </div>
                 </div>
 
@@ -147,9 +168,9 @@
                     <span class="type-tag">晚餐</span>
                     <div class="dot"></div>
                     <div class="card">
-                        <h3>🥩 琉球之牛 (需預約)</h3>
-                        <div class="transport-info">頂級燒肉晚餐</div>
-                        <a href="https://www.google.com/maps/search/?api=1&query=Ryukyu+no+Ushi+Naha+Kokusai+Dori" target="_blank" class="map-btn">Google Maps</a>
+                        <h3>🥩 焼肉 琉球の牛 那覇久茂地</h3>
+                        <div class="transport-info">需預約</div>
+                        <a href="https://maps.app.goo.gl/qPNXd8BFCqCVH64Y9" target="_blank" class="map-btn">Google Maps</a>
                     </div>
                 </div>
             </div>
@@ -336,6 +357,7 @@
                     <div class="card">
                         <h3>🛫 前往那霸機場</h3>
                         <div class="transport-info">領回行李後前往</div>
+                         <a href="https://maps.app.goo.gl/AqvA7Htpc5A9ucgY9" target="_blank" class="map-btn">Google Maps</a>
                     </div>
                 </div>
 
