@@ -5,61 +5,76 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>2026 沖繩家族旅行</title>
     <style>
-        /* 核心樣式設定 */
-        :root { --primary: #2d3436; --bg: #f8f9fa; --card-bg: #ffffff; --line: #e9ecef; }
-        body { font-family: "Helvetica Neue", Helvetica, Arial, "PingFang TC", "Heiti TC", "Microsoft JhengHei", sans-serif; background-color: var(--bg); color: var(--primary); margin: 0; padding: 0; padding-bottom: 80px; -webkit-tap-highlight-color: transparent; }
+        /* 基礎設定 */
+        :root { --primary: #2d3436; --bg: #f8f9fa; --line: #e9ecef; }
+        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; background-color: var(--bg); color: var(--primary); margin: 0; padding: 0; padding-bottom: 80px; -webkit-tap-highlight-color: transparent; }
         
         /* 頂部導航 */
-        .header { background: rgba(255,255,255,0.95); padding: 16px 20px; position: sticky; top: 0; z-index: 100; border-bottom: 1px solid #eee; backdrop-filter: blur(5px); display: flex; justify-content: space-between; align-items: center; box-shadow: 0 2px 10px rgba(0,0,0,0.03); }
-        .header h1 { margin: 0; font-size: 20px; font-weight: 700; letter-spacing: 1px; }
+        .header { background: rgba(255,255,255,0.98); padding: 16px 20px; position: sticky; top: 0; z-index: 100; border-bottom: 1px solid #eee; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 2px 8px rgba(0,0,0,0.02); }
+        .header h1 { margin: 0; font-size: 20px; font-weight: 800; letter-spacing: 0.5px; }
         .header .sub { font-size: 11px; color: #888; text-transform: uppercase; margin-top: 2px; }
-        .tag { background: #e3f2fd; color: #1565c0; padding: 4px 8px; border-radius: 12px; font-size: 11px; font-weight: bold; }
+        .tag { background: #e3f2fd; color: #1565c0; padding: 4px 10px; border-radius: 20px; font-size: 11px; font-weight: bold; }
 
-        /* 選單按鈕 */
-        .nav { display: flex; gap: 10px; padding: 12px 16px; overflow-x: auto; background: #fff; border-bottom: 1px solid #eee; scroll-behavior: smooth; }
+        /* 導航列 */
+        .nav { display: flex; gap: 8px; padding: 12px 16px; overflow-x: auto; background: #fff; border-bottom: 1px solid #eee; scroll-behavior: smooth; }
         .nav::-webkit-scrollbar { display: none; }
-        .nav-btn { flex: none; padding: 8px 16px; border-radius: 20px; background: #f1f3f5; color: #495057; text-decoration: none; font-size: 13px; font-weight: 500; transition: all 0.2s; }
-        .nav-btn:active { background: #2d3436; color: #fff; }
+        .nav-btn { flex: none; padding: 8px 16px; border-radius: 20px; background: #f8f9fa; color: #666; text-decoration: none; font-size: 13px; font-weight: 600; transition: all 0.2s; border: 1px solid transparent; }
+        .nav-btn:active { background: #2d3436; color: #fff; transform: scale(0.98); }
 
-        /* 內容區塊 */
-        .container { max-width: 600px; margin: 0 auto; padding: 20px; }
-        .day-section { margin-bottom: 40px; scroll-margin-top: 140px; }
-        .day-header { display: flex; align-items: center; margin-bottom: 20px; }
-        .day-title { font-size: 24px; font-weight: 800; margin-right: 12px; }
-        .day-date { color: #888; font-size: 14px; font-family: serif; }
-        .day-line { height: 1px; background: #eee; flex: 1; margin-left: 10px; }
-
-        /* 時間軸與卡片 */
-        .timeline { position: relative; padding-left: 16px; }
-        .timeline::before { content: ''; position: absolute; left: 19px; top: 10px; bottom: 0; width: 2px; background: #f1f3f5; }
-        .card-wrapper { position: relative; margin-bottom: 24px; }
-        .card-wrapper:last-child { margin-bottom: 0; }
+        /* 容器 */
+        .container { max-width: 600px; margin: 0 auto; padding: 24px 16px; }
+        .day-section { margin-bottom: 40px; scroll-margin-top: 150px; }
         
-        .dot { width: 10px; height: 10px; background: #fff; border: 2px solid #2d3436; border-radius: 50%; position: absolute; left: 0; top: 24px; z-index: 2; box-shadow: 0 0 0 4px var(--bg); }
-        .time-label { position: absolute; left: 24px; top: 0; font-size: 13px; font-weight: 600; color: #868e96; letter-spacing: 0.5px; }
-        .type-tag { position: absolute; right: 0; top: 0; font-size: 10px; padding: 2px 8px; border-radius: 10px; font-weight: bold; }
+        /* 標題樣式 */
+        .day-header { display: flex; align-items: baseline; margin-bottom: 24px; padding-left: 8px; }
+        .day-title { font-size: 28px; font-weight: 900; margin-right: 12px; color: #2d3436; }
+        .day-date { color: #868e96; font-size: 14px; font-weight: 500; }
 
-        .card { background: #fff; border-radius: 16px; padding: 16px; margin-left: 24px; margin-top: 20px; box-shadow: 0 2px 8px rgba(0,0,0,0.03); border: 1px solid #f1f3f5; position: relative; }
-        .card h3 { margin: 0 0 8px 0; font-size: 17px; font-weight: 600; line-height: 1.4; color: #2d3436; }
-        .transport-info { display: inline-flex; align-items: center; background: #f8f9fa; padding: 4px 8px; border-radius: 6px; font-size: 12px; color: #495057; margin-bottom: 8px; }
-        .cost { color: #e03131; font-size: 12px; font-weight: 500; margin-left: 8px; }
+        /* 核心時間軸排版 (Flexbox) */
+        .timeline-item { display: flex; margin-bottom: 24px; position: relative; }
         
-        .map-btn { display: flex; align-items: center; justify-content: center; width: 100%; padding: 10px 0; margin-top: 12px; background: #2d3436; color: #fff; text-decoration: none; border-radius: 8px; font-size: 13px; font-weight: 500; }
-        .map-btn:active { transform: scale(0.98); }
+        /* 左欄：時間 */
+        .time-col { width: 48px; flex-shrink: 0; text-align: right; padding-top: 4px; padding-right: 12px; }
+        .time-text { font-size: 14px; font-weight: 700; color: #2d3436; font-feature-settings: "tnum"; }
 
-        /* 清單樣式 (FunPASS用) */
-        .pass-list { list-style: none; padding: 0; margin: 10px 0; display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
-        .pass-list li { font-size: 12px; color: #666; display: flex; align-items: center; }
-        .pass-list li::before { content: ''; width: 6px; height: 6px; background: #d0bfff; border-radius: 50%; margin-right: 6px; }
+        /* 中欄：線與點 */
+        .line-col { width: 20px; position: relative; flex-shrink: 0; display: flex; justify-content: center; }
+        .line { position: absolute; top: 8px; bottom: -30px; width: 2px; background-color: #f1f3f5; z-index: 0; }
+        .timeline-item:last-child .line { display: none; }
+        .dot { width: 12px; height: 12px; border-radius: 50%; background: #fff; border: 3px solid #ccc; z-index: 1; margin-top: 6px; position: relative; box-shadow: 0 0 0 3px var(--bg); }
 
-        /* 分類顏色樣式 */
-        .t-flight { border-color: #a5d8ff; } .t-flight .dot { border-color: #1971c2; } .t-flight .type-tag { background: #e7f5ff; color: #1971c2; }
-        .t-food { border-color: #ffc9c9; } .t-food .dot { border-color: #e03131; } .t-food .type-tag { background: #fff5f5; color: #e03131; }
-        .t-spot { border-color: #b2f2bb; } .t-spot .dot { border-color: #2f9e44; } .t-spot .type-tag { background: #ebfbee; color: #2f9e44; }
-        .t-shop { border-color: #e5dbff; } .t-shop .dot { border-color: #845ef7; } .t-shop .type-tag { background: #f3f0ff; color: #845ef7; }
-        .t-stay { border-color: #ffec99; } .t-stay .dot { border-color: #f08c00; } .t-stay .type-tag { background: #fff9db; color: #f08c00; }
+        /* 右欄：內容卡片 */
+        .card-col { flex: 1; padding-left: 8px; min-width: 0; /* 防止文字溢出 */ }
+        .card { background: #fff; border-radius: 16px; padding: 16px; border: 1px solid #f1f3f5; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.02); transition: transform 0.2s; position: relative; overflow: hidden; }
+        .card:active { transform: scale(0.99); background-color: #fafafa; }
+        
+        /* 卡片內容 */
+        .card-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 8px; }
+        .card-title { font-size: 16px; font-weight: 700; color: #2d3436; line-height: 1.4; margin: 0; padding-right: 8px; }
+        .type-badge { font-size: 10px; padding: 2px 8px; border-radius: 6px; font-weight: bold; background: #eee; color: #666; white-space: nowrap; flex-shrink: 0; }
+        
+        .info-row { display: flex; align-items: center; gap: 6px; font-size: 13px; color: #666; margin-bottom: 4px; flex-wrap: wrap; }
+        .highlight { color: #e03131; font-weight: bold; font-size: 12px; background: #fff5f5; padding: 2px 6px; border-radius: 4px; display: inline-block; margin-top: 4px; }
+        
+        /* 按鈕 */
+        .map-btn { display: inline-flex; align-items: center; justify-content: center; width: 100%; margin-top: 12px; padding: 10px 0; background: #2d3436; color: #fff; text-decoration: none; border-radius: 10px; font-size: 13px; font-weight: 600; }
+        .map-btn svg { margin-right: 6px; }
 
-        .fab { position: fixed; bottom: 20px; right: 20px; width: 48px; height: 48px; background: #fff; border-radius: 50%; box-shadow: 0 4px 12px rgba(0,0,0,0.15); display: flex; align-items: center; justify-content: center; text-decoration: none; font-size: 20px; border: 1px solid #eee; z-index: 200; }
+        /* FunPASS 清單 */
+        .pass-list { margin: 8px 0; padding: 0; list-style: none; display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+        .pass-list li { font-size: 12px; color: #555; display: flex; align-items: center; }
+        .pass-list li::before { content: ""; display: block; width: 6px; height: 6px; background: #ae3ec9; border-radius: 50%; margin-right: 6px; }
+
+        /* 顏色主題 */
+        .t-flight .dot { border-color: #339af0; } .t-flight .type-badge { background: #e7f5ff; color: #1971c2; }
+        .t-food .dot { border-color: #ff6b6b; } .t-food .type-badge { background: #fff5f5; color: #e03131; }
+        .t-spot .dot { border-color: #51cf66; } .t-spot .type-badge { background: #ebfbee; color: #2b8a3e; }
+        .t-shop .dot { border-color: #cc5de8; } .t-shop .type-badge { background: #f3f0ff; color: #845ef7; }
+        .t-stay .dot { border-color: #fcc419; } .t-stay .type-badge { background: #fff9db; color: #f08c00; }
+        .t-other .dot { border-color: #adb5bd; }
+
+        /* 回到頂部 */
+        .fab { position: fixed; bottom: 24px; right: 24px; width: 50px; height: 50px; background: #fff; border-radius: 50%; box-shadow: 0 4px 12px rgba(0,0,0,0.15); display: flex; align-items: center; justify-content: center; text-decoration: none; font-size: 20px; color: #333; z-index: 200; border: 1px solid #eee; }
     </style>
 </head>
 <body>
@@ -67,7 +82,7 @@
     <header class="header">
         <div>
             <h1>OKINAWA</h1>
-            <div class="sub">2026 Family Trip (3/14-17)</div>
+            <div class="sub">2026 Family Trip</div>
         </div>
         <div class="tag">9人團</div>
     </header>
@@ -83,25 +98,23 @@
     <div class="container">
         
         <div id="info" class="day-section">
-            <h2 style="font-size:18px; font-weight:bold; margin-bottom:15px; color:#333;">📋 行前必備資訊</h2>
+            <h2 style="font-size:20px; font-weight:800; margin-bottom:16px;">行前必備</h2>
             
-            <div class="card" style="border-left: 4px solid #f08c00; margin-left:0; margin-bottom:15px;">
-                <h3>🏨 JR九州Blossom酒店</h3>
-                <div style="font-size:13px; color:#666; margin-bottom:10px;">那霸市中心，近國際通與美榮橋站</div>
+            <div class="card" style="margin-bottom:16px; border-left:4px solid #f08c00;">
+                <div class="card-title">🏨 JR九州Blossom酒店</div>
+                <div style="font-size:13px; color:#666; margin:8px 0;">那霸市中心，近國際通與美榮橋站</div>
                 <a href="https://www.google.com/maps/search/?api=1&query=JR+Kyushu+Hotel+Blossom+Naha" target="_blank" class="map-btn">導航至飯店</a>
             </div>
             
-            <div class="card" style="border-left: 4px solid #1971c2; margin-left:0; margin-bottom:15px;">
-                <h3>✈️ Visit Japan Web</h3>
-                <div style="font-size:13px; color:#1971c2; font-weight:bold; margin-bottom:5px;">入境審查與海關申報</div>
-                <div style="font-size:13px; color:#666; margin-bottom:10px;">請預先完成資料填寫並截圖 QR Code。</div>
+            <div class="card" style="margin-bottom:16px; border-left:4px solid #1971c2;">
+                <div class="card-title">✈️ Visit Japan Web</div>
+                <div style="font-size:13px; color:#666; margin:8px 0;">入境請先填寫並截圖 QR Code</div>
                 <a href="https://www.vjw.digital.go.jp/" target="_blank" class="map-btn" style="background:#1971c2;">前往官網登入</a>
             </div>
 
-            <div class="card" style="border-left: 4px solid #845ef7; margin-left:0;">
-                <h3>🎟️ Okinawa FunPASS APP</h3>
-                <div style="font-size:13px; color:#845ef7; font-weight:bold; margin-bottom:5px;">景點三合一套票</div>
-                <div style="font-size:13px; color:#444; font-weight:bold;">包含項目：</div>
+            <div class="card" style="border-left:4px solid #845ef7;">
+                <div class="card-title">🎟️ Okinawa FunPASS</div>
+                <div style="font-size:13px; color:#666; margin-top:8px;">包含項目：</div>
                 <ul class="pass-list">
                     <li>古宇利海洋塔</li>
                     <li>名護鳳梨園</li>
@@ -115,106 +128,137 @@
             <div class="day-header">
                 <span class="day-title">Day 1</span>
                 <span class="day-date">3/14 (Sat)</span>
-                <div class="day-line"></div>
             </div>
-            <div class="timeline">
-                <div class="card-wrapper t-flight">
-                    <span class="time-label">05:00</span>
-                    <span class="type-tag">集合</span>
-                    <div class="dot"></div>
+            
+            <div class="timeline-item t-flight">
+                <div class="time-col"><div class="time-text">05:00</div></div>
+                <div class="line-col"><div class="line"></div><div class="dot"></div></div>
+                <div class="card-col">
                     <div class="card">
-                        <h3>🚩 桃園機場集合</h3>
-                        <div class="transport-info">第二航廈 (T2)</div>
-                        <div style="margin-top:5px; font-size:12px; color:#e03131; font-weight:bold;">請務必準時集合！</div>
+                        <div class="card-header">
+                            <div class="card-title">🚩 桃園機場集合</div>
+                            <div class="type-badge">集合</div>
+                        </div>
+                        <div class="info-row">📍 第二航廈 (T2)</div>
+                        <div class="highlight">請務必準時集合！</div>
                     </div>
                 </div>
+            </div>
 
-                <div class="card-wrapper t-flight">
-                    <span class="time-label">06:55</span>
-                    <span class="type-tag">起飛</span>
-                    <div class="dot"></div>
+            <div class="timeline-item t-flight">
+                <div class="time-col"><div class="time-text">06:55</div></div>
+                <div class="line-col"><div class="line"></div><div class="dot"></div></div>
+                <div class="card-col">
                     <div class="card">
-                        <h3>🛫 飛機起飛 (BR112)</h3>
-                        <div class="transport-info">TPE → OKA</div>
-                        <div style="margin-top:5px; font-size:12px; color:#666;">飛行時間約 1小時20分</div>
+                        <div class="card-header">
+                            <div class="card-title">🛫 飛機起飛 (BR112)</div>
+                            <div class="type-badge">TPE-OKA</div>
+                        </div>
+                        <div class="info-row">⏱️ 飛行約 1小時20分</div>
                     </div>
                 </div>
+            </div>
 
-                <div class="card-wrapper t-flight">
-                    <span class="time-label">09:15</span>
-                    <span class="type-tag">抵達</span>
-                    <div class="dot"></div>
+            <div class="timeline-item t-flight">
+                <div class="time-col"><div class="time-text">09:15</div></div>
+                <div class="line-col"><div class="line"></div><div class="dot"></div></div>
+                <div class="card-col">
                     <div class="card">
-                        <h3>🛬 抵達那霸機場</h3>
-                        <div class="transport-info">出關約 1hr</div>
+                        <div class="card-header">
+                            <div class="card-title">🛬 抵達那霸機場</div>
+                            <div class="type-badge">入境</div>
+                        </div>
+                        <div class="info-row">🛂 出關約 1hr</div>
                         <a href="https://maps.app.goo.gl/AqvA7Htpc5A9ucgY9" target="_blank" class="map-btn">Google Maps</a>
                     </div>
                 </div>
+            </div>
 
-                <div class="card-wrapper t-stay">
-                    <span class="time-label">10:30</span>
-                    <span class="type-tag">住宿</span>
-                    <div class="dot"></div>
+            <div class="timeline-item t-stay">
+                <div class="time-col"><div class="time-text">10:30</div></div>
+                <div class="line-col"><div class="line"></div><div class="dot"></div></div>
+                <div class="card-col">
                     <div class="card">
-                        <h3>寄放行李 @ 飯店</h3>
-                        <div class="transport-info">🚌 單軌 (機場→美榮橋)</div>
-                        <span class="cost">¥2,700</span>
+                        <div class="card-header">
+                            <div class="card-title">寄放行李 @ 飯店</div>
+                            <div class="type-badge">交通</div>
+                        </div>
+                        <div class="info-row">🚌 單軌 (機場→美榮橋)</div>
+                        <div class="info-row">💰 ¥2,700</div>
                         <a href="https://www.google.com/maps/search/?api=1&query=JR+Kyushu+Hotel+Blossom+Naha" target="_blank" class="map-btn">Google Maps</a>
                     </div>
                 </div>
+            </div>
 
-                <div class="card-wrapper t-food">
-                    <span class="time-label">11:30</span>
-                    <span class="type-tag">午餐</span>
-                    <div class="dot"></div>
+            <div class="timeline-item t-food">
+                <div class="time-col"><div class="time-text">11:30</div></div>
+                <div class="line-col"><div class="line"></div><div class="dot"></div></div>
+                <div class="card-col">
                     <div class="card">
-                        <h3>🍱 牧志公設市場</h3>
-                        <div class="transport-info">🚶 步行 10-15分</div>
+                        <div class="card-header">
+                            <div class="card-title">🍱 牧志公設市場</div>
+                            <div class="type-badge">美食</div>
+                        </div>
+                        <div class="info-row">🚶 步行 10-15分</div>
                         <a href="https://www.google.com/maps/search/?api=1&query=Makishi+Public+Market" target="_blank" class="map-btn">Google Maps</a>
                     </div>
                 </div>
+            </div>
 
-                <div class="card-wrapper t-shop">
-                    <span class="time-label">14:00</span>
-                    <span class="type-tag">購物</span>
-                    <div class="dot"></div>
+            <div class="timeline-item t-shop">
+                <div class="time-col"><div class="time-text">14:00</div></div>
+                <div class="line-col"><div class="line"></div><div class="dot"></div></div>
+                <div class="card-col">
                     <div class="card">
-                        <h3>🛍️ 國際通 / 唐吉訶德</h3>
-                        <div class="transport-info">飯店就在附近</div>
+                        <div class="card-header">
+                            <div class="card-title">🛍️ 國際通 / 唐吉訶德</div>
+                            <div class="type-badge">購物</div>
+                        </div>
+                        <div class="info-row">🚶 飯店就在附近</div>
                         <a href="https://www.google.com/maps/search/?api=1&query=Don+Quijote+Kokusai+Street" target="_blank" class="map-btn">Google Maps</a>
                     </div>
                 </div>
+            </div>
 
-                <div class="card-wrapper t-stay">
-                    <span class="time-label">15:30</span>
-                    <span class="type-tag">Check-in</span>
-                    <div class="dot"></div>
+            <div class="timeline-item t-stay">
+                <div class="time-col"><div class="time-text">15:30</div></div>
+                <div class="line-col"><div class="line"></div><div class="dot"></div></div>
+                <div class="card-col">
                     <div class="card">
-                        <h3>🏨 回飯店 Check-in</h3>
-                        <div class="transport-info">🚶 步行</div>
-                         <a href="https://www.google.com/maps/search/?api=1&query=JR+Kyushu+Hotel+Blossom+Naha" target="_blank" class="map-btn">Google Maps</a>
+                        <div class="card-header">
+                            <div class="card-title">🏨 飯店 Check-in</div>
+                            <div class="type-badge">住宿</div>
+                        </div>
+                        <a href="https://www.google.com/maps/search/?api=1&query=JR+Kyushu+Hotel+Blossom+Naha" target="_blank" class="map-btn">Google Maps</a>
                     </div>
                 </div>
+            </div>
 
-                <div class="card-wrapper t-food">
-                    <span class="time-label">18:00</span>
-                    <span class="type-tag">晚餐</span>
-                    <div class="dot"></div>
+            <div class="timeline-item t-food">
+                <div class="time-col"><div class="time-text">18:00</div></div>
+                <div class="line-col"><div class="line"></div><div class="dot"></div></div>
+                <div class="card-col">
                     <div class="card">
-                        <h3>🥩 焼肉 琉球の牛 那覇久茂地</h3>
-                        <div class="transport-info">🚶 步行</div>
-                        <div style="margin-top:5px; font-size:12px; color:#e03131; font-weight:bold;">已預約 18:00 (9人: 4+5)</div>
+                        <div class="card-header">
+                            <div class="card-title">🥩 焼肉 琉球の牛</div>
+                            <div class="type-badge">晚餐</div>
+                        </div>
+                        <div class="info-row">📍 那覇久茂地店</div>
+                        <div class="highlight">已預約 18:00 (9人: 4+5)</div>
                         <a href="https://maps.app.goo.gl/qPNXd8BFCqCVH64Y9" target="_blank" class="map-btn">Google Maps</a>
                     </div>
                 </div>
+            </div>
 
-                 <div class="card-wrapper t-spot">
-                    <span class="time-label">20:00</span>
-                    <span class="type-tag">散步</span>
-                    <div class="dot"></div>
+            <div class="timeline-item t-other">
+                <div class="time-col"><div class="time-text">20:00</div></div>
+                <div class="line-col"><div class="line"></div><div class="dot"></div></div>
+                <div class="card-col">
                     <div class="card">
-                        <h3>🚶 飯後散步 / 買甜點</h3>
-                        <div class="transport-info">步行</div>
+                        <div class="card-header">
+                            <div class="card-title">🚶 飯後散步 / 買甜點</div>
+                            <div class="type-badge">自由</div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -224,60 +268,77 @@
             <div class="day-header">
                 <span class="day-title">Day 2</span>
                 <span class="day-date">3/15 (Sun)</span>
-                <div class="day-line"></div>
             </div>
-            <div class="timeline">
-                <div class="card-wrapper t-flight">
-                    <span class="time-label">09:00</span>
-                    <span class="type-tag">包車</span>
-                    <div class="dot"></div>
+            
+            <div class="timeline-item t-flight">
+                <div class="time-col"><div class="time-text">09:00</div></div>
+                <div class="line-col"><div class="line"></div><div class="dot"></div></div>
+                <div class="card-col">
                     <div class="card">
-                        <h3>🚙 飯店大廳集合出發</h3>
-                        <div class="transport-info">9人座包車一日遊</div>
+                        <div class="card-header">
+                            <div class="card-title">🚙 飯店大廳集合</div>
+                            <div class="type-badge">包車</div>
+                        </div>
+                        <div class="info-row">9人座包車一日遊</div>
                     </div>
                 </div>
+            </div>
 
-                <div class="card-wrapper t-spot">
-                    <span class="time-label">10:30</span>
-                    <span class="type-tag">景點</span>
-                    <div class="dot"></div>
+            <div class="timeline-item t-spot">
+                <div class="time-col"><div class="time-text">10:30</div></div>
+                <div class="line-col"><div class="line"></div><div class="dot"></div></div>
+                <div class="card-col">
                     <div class="card">
-                        <h3>🌊 古宇利島</h3>
-                        <div class="transport-info">古宇利大橋 / 海洋塔</div>
+                        <div class="card-header">
+                            <div class="card-title">🌊 古宇利島</div>
+                            <div class="type-badge">景點</div>
+                        </div>
+                        <div class="info-row">古宇利大橋 / 海洋塔</div>
                         <a href="https://www.google.com/maps/search/?api=1&query=Kouri+Ocean+Tower" target="_blank" class="map-btn">Google Maps</a>
                     </div>
                 </div>
+            </div>
 
-                <div class="card-wrapper t-spot">
-                    <span class="time-label">13:30</span>
-                    <span class="type-tag">景點</span>
-                    <div class="dot"></div>
+            <div class="timeline-item t-spot">
+                <div class="time-col"><div class="time-text">13:30</div></div>
+                <div class="line-col"><div class="line"></div><div class="dot"></div></div>
+                <div class="card-col">
                     <div class="card">
-                        <h3>🍍 名護鳳梨園</h3>
-                        <div class="transport-info">搭乘無人遊園車</div>
+                        <div class="card-header">
+                            <div class="card-title">🍍 名護鳳梨園</div>
+                            <div class="type-badge">景點</div>
+                        </div>
+                        <div class="info-row">搭乘無人遊園車</div>
                         <a href="https://www.google.com/maps/search/?api=1&query=Nago+Pineapple+Park" target="_blank" class="map-btn">Google Maps</a>
                     </div>
                 </div>
+            </div>
 
-                <div class="card-wrapper t-spot">
-                    <span class="time-label">15:40</span>
-                    <span class="type-tag">景點</span>
-                    <div class="dot"></div>
+            <div class="timeline-item t-spot">
+                <div class="time-col"><div class="time-text">15:40</div></div>
+                <div class="line-col"><div class="line"></div><div class="dot"></div></div>
+                <div class="card-col">
                     <div class="card">
-                        <h3>🐘 萬座毛 (象鼻岩)</h3>
-                        <div class="transport-info">絕美海景懸崖</div>
+                        <div class="card-header">
+                            <div class="card-title">🐘 萬座毛 (象鼻岩)</div>
+                            <div class="type-badge">景點</div>
+                        </div>
+                        <div class="info-row">絕美海景懸崖</div>
                         <a href="https://www.google.com/maps/search/?api=1&query=Manzamo" target="_blank" class="map-btn">Google Maps</a>
                     </div>
                 </div>
+            </div>
 
-                <div class="card-wrapper t-shop">
-                    <span class="time-label">17:30</span>
-                    <span class="type-tag">購物</span>
-                    <div class="dot"></div>
+            <div class="timeline-item t-shop">
+                <div class="time-col"><div class="time-text">17:30</div></div>
+                <div class="line-col"><div class="line"></div><div class="dot"></div></div>
+                <div class="card-col">
                     <div class="card">
-                        <h3>🛒 UNION SUKARA 超市</h3>
-                        <div class="transport-info">包車順路</div>
-                        <div style="font-size:11px; color:#666; margin-top:4px;">Kokusai Street Store</div>
+                        <div class="card-header">
+                            <div class="card-title">🛒 UNION SUKARA</div>
+                            <div class="type-badge">超市</div>
+                        </div>
+                        <div class="info-row">Kokusai Street Store</div>
                         <a href="https://maps.app.goo.gl/8ku7h2LaGn4BkjE77" target="_blank" class="map-btn">Google Maps</a>
                     </div>
                 </div>
@@ -288,79 +349,81 @@
             <div class="day-header">
                 <span class="day-title">Day 3</span>
                 <span class="day-date">3/16 (Mon)</span>
-                <div class="day-line"></div>
             </div>
-            <div class="timeline">
-                <div class="card-wrapper t-spot">
-                    <span class="time-label">09:00</span>
-                    <span class="type-tag">景點</span>
-                    <div class="dot"></div>
+
+            <div class="timeline-item t-spot">
+                <div class="time-col"><div class="time-text">09:00</div></div>
+                <div class="line-col"><div class="line"></div><div class="dot"></div></div>
+                <div class="card-col">
                     <div class="card">
-                        <h3>🏯 首里城公園</h3>
-                        <div class="transport-info">🚌 單軌 (美榮橋→首里)</div>
-                        <span class="cost">¥3,060</span>
+                        <div class="card-header">
+                            <div class="card-title">🏯 首里城公園</div>
+                            <div class="type-badge">景點</div>
+                        </div>
+                        <div class="info-row">🚌 單軌 (美榮橋→首里)</div>
+                        <div class="info-row">💰 ¥3,060</div>
                         <a href="https://www.google.com/maps/search/?api=1&query=Shuri+Castle" target="_blank" class="map-btn">Google Maps</a>
                     </div>
                 </div>
+            </div>
 
-                <div class="card-wrapper t-spot">
-                    <span class="time-label">09:30</span>
-                    <span class="type-tag">景點</span>
-                    <div class="dot"></div>
+            <div class="timeline-item t-spot">
+                <div class="time-col"><div class="time-text">09:30</div></div>
+                <div class="line-col"><div class="line"></div><div class="dot"></div></div>
+                <div class="card-col">
                     <div class="card">
-                        <h3>🏯 轉乘至首里門</h3>
-                        <div class="transport-info">🚶 步行 或 🚌 巴士8號</div>
-                        <span class="cost">¥1,350</span>
+                        <div class="card-header">
+                            <div class="card-title">🏯 轉乘至首里門</div>
+                            <div class="type-badge">步行</div>
+                        </div>
+                        <div class="info-row">🚶 步行 或 🚌 巴士8號</div>
                         <a href="https://www.google.com/maps/search/?api=1&query=Shureimon+Gate" target="_blank" class="map-btn">Google Maps</a>
                     </div>
                 </div>
+            </div>
 
-                <div class="card-wrapper t-flight">
-                    <span class="time-label">11:30</span>
-                    <span class="type-tag">交通</span>
-                    <div class="dot"></div>
+            <div class="timeline-item t-shop">
+                <div class="time-col"><div class="time-text">12:00</div></div>
+                <div class="line-col"><div class="line"></div><div class="dot"></div></div>
+                <div class="card-col">
                     <div class="card">
-                        <h3>🚌 前往永旺夢樂城 (轉乘)</h3>
-                        <div class="transport-info">單軌 (首里→旭橋)</div>
-                        <span class="cost">¥3,060</span>
-                    </div>
-                </div>
-
-                <div class="card-wrapper t-shop">
-                    <span class="time-label">12:00</span>
-                    <span class="type-tag">購物</span>
-                    <div class="dot"></div>
-                    <div class="card">
-                        <h3>🛍️ 永旺夢樂城 Rycom</h3>
-                        <div class="transport-info">🚌 高速巴士 152</div>
-                        <span class="cost">¥8,910</span>
-                        <div style="margin-top:5px; font-size:12px; color:#888;">沖繩最大購物中心</div>
+                        <div class="card-header">
+                            <div class="card-title">🛍️ 永旺夢樂城 Rycom</div>
+                            <div class="type-badge">購物</div>
+                        </div>
+                        <div class="info-row">🚌 高速巴士 152</div>
+                        <div class="info-row">💰 ¥8,910</div>
                         <a href="https://www.google.com/maps/search/?api=1&query=Aeon+Mall+Okinawa+Rycom" target="_blank" class="map-btn">Google Maps</a>
                     </div>
                 </div>
+            </div>
 
-                <div class="card-wrapper t-spot">
-                    <span class="time-label">16:00</span>
-                    <span class="type-tag">景點</span>
-                    <div class="dot"></div>
+            <div class="timeline-item t-spot">
+                <div class="time-col"><div class="time-text">16:00</div></div>
+                <div class="line-col"><div class="line"></div><div class="dot"></div></div>
+                <div class="card-col">
                     <div class="card">
-                        <h3>🎡 美國村 (American Village)</h3>
-                        <div class="transport-info">🚌 巴士 96號</div>
-                        <span class="cost">¥3,240</span>
-                        <div style="margin-top:5px; font-size:12px; color:#888;">夕陽海灘 / 異國風情晚餐</div>
+                        <div class="card-header">
+                            <div class="card-title">🎡 美國村 American Village</div>
+                            <div class="type-badge">景點</div>
+                        </div>
+                        <div class="info-row">🚌 巴士 96號</div>
                         <a href="https://maps.app.goo.gl/P5Ykxhk1aZbKxRuk7" target="_blank" class="map-btn">Google Maps</a>
                     </div>
                 </div>
+            </div>
 
-                <div class="card-wrapper t-flight">
-                    <span class="time-label">19:30</span>
-                    <span class="type-tag">交通</span>
-                    <div class="dot"></div>
+            <div class="timeline-item t-flight">
+                <div class="time-col"><div class="time-text">19:30</div></div>
+                <div class="line-col"><div class="line"></div><div class="dot"></div></div>
+                <div class="card-col">
                     <div class="card">
-                        <h3>🔙 返回那霸市區</h3>
-                        <div class="transport-info">🚌 巴士 28 / 120號</div>
-                        <div style="font-size:11px; color:#666;">至 旭橋/縣廳前</div>
-                        <span class="cost">¥7,200</span>
+                        <div class="card-header">
+                            <div class="card-title">🔙 返回那霸市區</div>
+                            <div class="type-badge">交通</div>
+                        </div>
+                        <div class="info-row">🚌 巴士 28 / 120號</div>
+                        <div class="info-row">📍 至 旭橋/縣廳前</div>
                     </div>
                 </div>
             </div>
@@ -370,113 +433,143 @@
             <div class="day-header">
                 <span class="day-title">Day 4</span>
                 <span class="day-date">3/17 (Tue)</span>
-                <div class="day-line"></div>
             </div>
-            <div class="timeline">
-                <div class="card-wrapper t-stay">
-                    <span class="time-label">09:00</span>
-                    <span class="type-tag">退房</span>
-                    <div class="dot"></div>
+
+            <div class="timeline-item t-stay">
+                <div class="time-col"><div class="time-text">09:00</div></div>
+                <div class="line-col"><div class="line"></div><div class="dot"></div></div>
+                <div class="card-col">
                     <div class="card">
-                        <h3>🧳 辦理退房 / 寄放行李</h3>
+                        <div class="card-header">
+                            <div class="card-title">🧳 辦理退房</div>
+                            <div class="type-badge">住宿</div>
+                        </div>
+                        <div class="info-row">行李寄放櫃台</div>
                     </div>
                 </div>
+            </div>
 
-                <div class="card-wrapper t-spot">
-                    <span class="time-label">09:15</span>
-                    <span class="type-tag">景點</span>
-                    <div class="dot"></div>
+            <div class="timeline-item t-spot">
+                <div class="time-col"><div class="time-text">09:15</div></div>
+                <div class="line-col"><div class="line"></div><div class="dot"></div></div>
+                <div class="card-col">
                     <div class="card">
-                        <h3>⛩️ 波上宮</h3>
-                        <div class="transport-info">🚶 步行 或 🚌 單軌</div>
-                        <div style="margin-top:5px; font-size:12px; color:#888;">懸崖上的神社</div>
+                        <div class="card-header">
+                            <div class="card-title">⛩️ 波上宮</div>
+                            <div class="type-badge">景點</div>
+                        </div>
+                        <div class="info-row">🚶 步行 或 🚌 單軌</div>
                         <a href="https://www.google.com/maps/search/?api=1&query=Naminoue+Shrine" target="_blank" class="map-btn">Google Maps</a>
                     </div>
                 </div>
-                
-                 <div class="card-wrapper t-flight">
-                    <span class="time-label">10:20</span>
-                    <span class="type-tag">交通</span>
-                    <div class="dot"></div>
+            </div>
+
+            <div class="timeline-item t-flight">
+                <div class="time-col"><div class="time-text">10:20</div></div>
+                <div class="line-col"><div class="line"></div><div class="dot"></div></div>
+                <div class="card-col">
                     <div class="card">
-                        <h3>🚌 前往瀨長島 (轉乘)</h3>
-                        <div class="transport-info">步行至「縣廳北口」</div>
+                        <div class="card-header">
+                            <div class="card-title">🚌 前往瀨長島 (轉乘)</div>
+                            <div class="type-badge">交通</div>
+                        </div>
+                        <div class="info-row">步行至「縣廳北口」</div>
                     </div>
                 </div>
+            </div>
 
-                <div class="card-wrapper t-spot">
-                    <span class="time-label">10:45</span>
-                    <span class="type-tag">景點</span>
-                    <div class="dot"></div>
+            <div class="timeline-item t-spot">
+                <div class="time-col"><div class="time-text">10:45</div></div>
+                <div class="line-col"><div class="line"></div><div class="dot"></div></div>
+                <div class="card-col">
                     <div class="card">
-                        <h3>✈️ 瀨長島 (Umikaji Terrace)</h3>
-                        <div class="transport-info">🚌 巴士 TK02</div>
-                        <span class="cost">¥3,150</span>
-                        <div style="margin-top:5px; font-size:12px; color:#888;">希臘風建築 / 看飛機起降</div>
+                        <div class="card-header">
+                            <div class="card-title">✈️ 瀨長島 Umikaji</div>
+                            <div class="type-badge">景點</div>
+                        </div>
+                        <div class="info-row">🚌 巴士 TK02</div>
+                        <div class="info-row">💰 ¥3,150</div>
                         <a href="https://www.google.com/maps/search/?api=1&query=Umikaji+Terrace+Senagajima" target="_blank" class="map-btn">Google Maps</a>
                     </div>
                 </div>
+            </div>
 
-                <div class="card-wrapper t-shop">
-                    <span class="time-label">13:15</span>
-                    <span class="type-tag">購物</span>
-                    <div class="dot"></div>
+            <div class="timeline-item t-shop">
+                <div class="time-col"><div class="time-text">13:15</div></div>
+                <div class="line-col"><div class="line"></div><div class="dot"></div></div>
+                <div class="card-col">
                     <div class="card">
-                        <h3>🛍️ Outlet Mall Ashibinaa</h3>
-                        <div class="transport-info">🚌 巴士 TK02 (往南)</div>
-                        <span class="cost">¥2,250</span>
-                        <div style="margin-top:5px; font-size:12px; color:#888;">最後衝刺購物</div>
+                        <div class="card-header">
+                            <div class="card-title">🛍️ Outlet Ashibinaa</div>
+                            <div class="type-badge">購物</div>
+                        </div>
+                        <div class="info-row">🚌 巴士 TK02 (往南)</div>
+                        <div class="info-row">💰 ¥2,250</div>
                         <a href="https://www.google.com/maps/search/?api=1&query=Ashibinaa+Outlet+Mall" target="_blank" class="map-btn">Google Maps</a>
                     </div>
                 </div>
-                
-                <div class="card-wrapper t-flight">
-                    <span class="time-label">15:30</span>
-                    <span class="type-tag">交通</span>
-                    <div class="dot"></div>
+            </div>
+
+            <div class="timeline-item t-flight">
+                <div class="time-col"><div class="time-text">15:30</div></div>
+                <div class="line-col"><div class="line"></div><div class="dot"></div></div>
+                <div class="card-col">
                     <div class="card">
-                        <h3>🔙 回那霸市區 (拿行李)</h3>
-                        <div class="transport-info">🚌 巴士 55/98號</div>
-                        <span class="cost">¥4,500</span>
+                        <div class="card-header">
+                            <div class="card-title">🔙 回那霸市區</div>
+                            <div class="type-badge">交通</div>
+                        </div>
+                        <div class="info-row">🚌 巴士 55/98號</div>
+                        <div class="info-row">💰 ¥4,500</div>
                     </div>
                 </div>
+            </div>
 
-                <div class="card-wrapper t-flight">
-                    <span class="time-label">16:40</span>
-                    <span class="type-tag">機場</span>
-                    <div class="dot"></div>
+            <div class="timeline-item t-flight">
+                <div class="time-col"><div class="time-text">16:40</div></div>
+                <div class="line-col"><div class="line"></div><div class="dot"></div></div>
+                <div class="card-col">
                     <div class="card">
-                        <h3>🛫 前往那霸機場</h3>
-                        <div class="transport-info">單軌 (美榮橋→機場)</div>
-                        <span class="cost">¥2,700</span>
-                         <a href="https://maps.app.goo.gl/AqvA7Htpc5A9ucgY9" target="_blank" class="map-btn">Google Maps</a>
+                        <div class="card-header">
+                            <div class="card-title">🛫 前往那霸機場</div>
+                            <div class="type-badge">機場</div>
+                        </div>
+                        <div class="info-row">🚌 單軌 (美榮橋→機場)</div>
+                        <div class="info-row">💰 ¥2,700</div>
+                        <a href="https://maps.app.goo.gl/AqvA7Htpc5A9ucgY9" target="_blank" class="map-btn">Google Maps</a>
                     </div>
                 </div>
+            </div>
 
-                <div class="card-wrapper t-flight">
-                    <span class="time-label">20:10</span>
-                    <span class="type-tag">起飛</span>
-                    <div class="dot"></div>
+            <div class="timeline-item t-flight">
+                <div class="time-col"><div class="time-text">20:10</div></div>
+                <div class="line-col"><div class="line"></div><div class="dot"></div></div>
+                <div class="card-col">
                     <div class="card">
-                        <h3>🛫 飛機起飛 (BR185)</h3>
-                        <div class="transport-info">OKA → TPE</div>
-                        <div style="margin-top:5px; font-size:12px; color:#666;">飛行時間約 1小時45分</div>
+                        <div class="card-header">
+                            <div class="card-title">🏠 飛機起飛 (BR185)</div>
+                            <div class="type-badge">OKA-TPE</div>
+                        </div>
+                        <div class="info-row">⏱️ 飛行約 1小時45分</div>
                     </div>
                 </div>
+            </div>
 
-                <div class="card-wrapper t-flight">
-                    <span class="time-label">20:55</span>
-                    <span class="type-tag">抵達</span>
-                    <div class="dot"></div>
+            <div class="timeline-item t-flight">
+                <div class="time-col"><div class="time-text">20:55</div></div>
+                <div class="line-col"><div class="line"></div><div class="dot"></div></div>
+                <div class="card-col">
                     <div class="card">
-                        <h3>🏠 抵達桃園機場</h3>
-                        <div class="transport-info">第二航廈</div>
-                        <div style="margin-top:5px; font-size:12px; color:#e03131; font-weight:bold;">平安歸國！</div>
+                        <div class="card-header">
+                            <div class="card-title">🛬 抵達桃園機場</div>
+                            <div class="type-badge">TPE</div>
+                        </div>
+                        <div class="info-row">📍 第二航廈</div>
+                        <div class="highlight">平安歸國！</div>
                     </div>
                 </div>
             </div>
         </div>
-
     </div>
 
     <a href="#" class="fab">↑</a>
