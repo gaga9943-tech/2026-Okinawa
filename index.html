@@ -2,6 +2,7 @@
 <html lang="zh-TW">
 <head>
     <meta charset="UTF-8">
+    <meta name="robots" content="noindex" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>2026 沖繩家族旅行</title>
     <style>
@@ -35,7 +36,8 @@
         
         /* 左欄：時間 */
         .time-col { width: 48px; flex-shrink: 0; text-align: right; padding-top: 4px; padding-right: 12px; }
-        .time-text { font-size: 14px; font-weight: 700; color: #2d3436; font-feature-settings: "tnum"; }
+        .time-text { font-size: 13px; font-weight: 700; color: #2d3436; font-feature-settings: "tnum"; white-space: nowrap; }
+        .time-sub { font-size: 10px; color: #888; display: block; margin-top: 2px; }
 
         /* 中欄：線與點 */
         .line-col { width: 20px; position: relative; flex-shrink: 0; display: flex; justify-content: center; }
@@ -44,7 +46,7 @@
         .dot { width: 12px; height: 12px; border-radius: 50%; background: #fff; border: 3px solid #ccc; z-index: 1; margin-top: 6px; position: relative; box-shadow: 0 0 0 3px var(--bg); }
 
         /* 右欄：內容卡片 */
-        .card-col { flex: 1; padding-left: 8px; min-width: 0; /* 防止文字溢出 */ }
+        .card-col { flex: 1; padding-left: 8px; min-width: 0; }
         .card { background: #fff; border-radius: 16px; padding: 16px; border: 1px solid #f1f3f5; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.02); transition: transform 0.2s; position: relative; overflow: hidden; }
         .card:active { transform: scale(0.99); background-color: #fafafa; }
         
@@ -60,6 +62,13 @@
         .map-btn { display: inline-flex; align-items: center; justify-content: center; width: 100%; margin-top: 12px; padding: 10px 0; background: #2d3436; color: #fff; text-decoration: none; border-radius: 10px; font-size: 13px; font-weight: 600; }
         .map-btn svg { margin-right: 6px; }
 
+        /* 選項連結按鈕 (多個選項用) */
+        .option-link { display: block; padding: 10px; background: #f8f9fa; border-radius: 8px; margin-bottom: 8px; text-decoration: none; color: #333; font-size: 13px; font-weight: 500; border: 1px solid #eee; transition: background 0.2s; }
+        .option-link:last-child { margin-bottom: 0; }
+        .option-link:active { background: #e9ecef; }
+        .option-title { font-weight: bold; display: block; margin-bottom: 2px; }
+        .option-desc { font-size: 11px; color: #666; }
+
         /* FunPASS 清單 */
         .pass-list { margin: 8px 0; padding: 0; list-style: none; display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
         .pass-list li { font-size: 12px; color: #555; display: flex; align-items: center; }
@@ -71,7 +80,7 @@
         .t-spot .dot { border-color: #51cf66; } .t-spot .type-badge { background: #ebfbee; color: #2b8a3e; }
         .t-shop .dot { border-color: #cc5de8; } .t-shop .type-badge { background: #f3f0ff; color: #845ef7; }
         .t-stay .dot { border-color: #fcc419; } .t-stay .type-badge { background: #fff9db; color: #f08c00; }
-        .t-other .dot { border-color: #adb5bd; }
+        .t-other .dot { border-color: #adb5bd; } .t-other .type-badge { background: #f1f3f5; color: #495057; }
 
         /* 回到頂部 */
         .fab { position: fixed; bottom: 24px; right: 24px; width: 50px; height: 50px; background: #fff; border-radius: 50%; box-shadow: 0 4px 12px rgba(0,0,0,0.15); display: flex; align-items: center; justify-content: center; text-decoration: none; font-size: 20px; color: #333; z-index: 200; border: 1px solid #eee; }
@@ -299,6 +308,62 @@
                 </div>
             </div>
 
+            <div class="timeline-item t-food">
+                <div class="time-col"><div class="time-text">推薦</div><span class="time-sub">午餐</span></div>
+                <div class="line-col"><div class="line"></div><div class="dot"></div></div>
+                <div class="card-col">
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="card-title">🍽️ 午餐推薦</div>
+                            <div class="type-badge">自由選擇</div>
+                        </div>
+                        
+                        <a href="https://www.google.com/maps/search/?api=1&query=Ocean+Blue+Kouri+Ocean+Tower" target="_blank" class="option-link">
+                            <span class="option-title">Ocean Blue (海洋塔內)</span>
+                            <span class="option-desc">絕美海景，主要供應披薩與泰式咖哩</span>
+                        </a>
+                        
+                        <a href="https://www.google.com/maps/search/?api=1&query=L+LOTA+Restaurant+Kouri" target="_blank" class="option-link">
+                            <span class="option-title">L LOTA 餐廳</span>
+                            <span class="option-desc">景觀咖啡廳，義大利麵與甜點</span>
+                        </a>
+
+                        <a href="https://www.google.com/maps/search/?api=1&query=Kouri+Shrimp" target="_blank" class="option-link">
+                            <span class="option-title">古宇利蝦蝦飯</span>
+                            <span class="option-desc">必吃名店，蒜香奶油蝦</span>
+                        </a>
+
+                        <a href="https://www.google.com/maps/search/?api=1&query=Airando+Fiji+Restaurant" target="_blank" class="option-link">
+                            <span class="option-title">Airando Fiji Restaurant</span>
+                            <span class="option-desc">異國風情，特色斐濟料理</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="timeline-item t-spot">
+                <div class="time-col"><div class="time-text">順路</div><span class="time-sub">周邊</span></div>
+                <div class="line-col"><div class="line"></div><div class="dot"></div></div>
+                <div class="card-col">
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="card-title">📸 古宇利周邊景點</div>
+                            <div class="type-badge">打卡</div>
+                        </div>
+                        
+                        <a href="https://www.google.com/maps/search/?api=1&query=Heart+Rock+Okinawa" target="_blank" class="option-link">
+                            <span class="option-title">❤️ 心形岩 (Heart Rock)</span>
+                            <span class="option-desc">嵐廣告拍攝地，戀愛聖地</span>
+                        </a>
+                        
+                        <a href="https://www.google.com/maps/search/?api=1&query=Kouri+Bridge+South+Observation+Deck" target="_blank" class="option-link">
+                            <span class="option-title">🌉 古宇利大橋 南端觀景台</span>
+                            <span class="option-desc">眺望大橋與古宇利藍的最佳視角</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
             <div class="timeline-item t-spot">
                 <div class="time-col"><div class="time-text">13:30</div></div>
                 <div class="line-col"><div class="line"></div><div class="dot"></div></div>
@@ -310,6 +375,21 @@
                         </div>
                         <div class="info-row">搭乘無人遊園車</div>
                         <a href="https://www.google.com/maps/search/?api=1&query=Nago+Pineapple+Park" target="_blank" class="map-btn">Google Maps</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="timeline-item t-shop">
+                <div class="time-col"><div class="time-text">順路</div><span class="time-sub">伴手禮</span></div>
+                <div class="line-col"><div class="line"></div><div class="dot"></div></div>
+                <div class="card-col">
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="card-title">🍠 御菓子御殿 恩納店</div>
+                            <div class="type-badge">購物</div>
+                        </div>
+                        <div class="info-row">紅薯塔專賣店，建築很有特色</div>
+                        <a href="https://www.google.com/maps/search/?api=1&query=Okashigoten+Onna" target="_blank" class="map-btn">Google Maps</a>
                     </div>
                 </div>
             </div>
